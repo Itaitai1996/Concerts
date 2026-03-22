@@ -139,7 +139,7 @@
 <script>
 // ── CONFIG ──────────────────────────────────────────
 var PASSWORD = 'Itai486245';
-var BIN_ID   = '69c07fcec3097a1dd54d2a82';
+var BIN_ID   = '69c0814eb7ec241ddc92667b';
 var API_KEY  = '$2a$10$GcFW41dq0sL4Oojo2Mf5Tutqp/jF7uAZ/cK6VLeosSw9IVL4LqDGO';
 // ────────────────────────────────────────────────────
 
@@ -176,9 +176,7 @@ function logout() {
 // ── JSONbin ──
 function loadConcerts() {
   setStatus('Loading…');
-  fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest', {
-    headers: { 'X-Master-Key': API_KEY }
-  })
+  fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest')
   .then(function(r){ return r.json(); })
   .then(function(data){
     concerts = data.record.concerts || [];
