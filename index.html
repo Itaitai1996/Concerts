@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,227 +7,89 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html, body {
-width: 100%;
-background: transparent;
-color: #2a2218;
-font-family: ‘Montserrat’, sans-serif;
-font-weight: 300;
-font-size: 14px;
-letter-spacing: 0.03em;
-}
-
-.cn-section {
-width: 100%;
-margin-bottom: 64px;
-}
-
-.cn-section-title {
-font-family: ‘Montserrat’, sans-serif;
-font-size: 13px;
-font-weight: 400;
-letter-spacing: 0.28em;
-text-transform: uppercase;
-color: #8a7f72;
-padding-bottom: 18px;
-border-bottom: 1px solid #c8bfb0;
-text-align: center;
-}
-
-.cn-item {
-display: grid;
-grid-template-columns: 200px 1fr;
-border-bottom: 1px solid #ddd8ce;
-}
-
-.cn-date {
-padding: 36px 32px 36px 0;
-border-right: 1px solid #ddd8ce;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-}
-.cn-month {
-font-family: ‘Montserrat’, sans-serif;
-font-size: 10px;
-font-weight: 400;
-letter-spacing: 0.22em;
-text-transform: uppercase;
-color: #8a7f72;
-margin-bottom: 6px;
-display: block;
-}
-.cn-day {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 80px;
-font-weight: 300;
-line-height: 0.85;
-color: #2a2218;
-display: block;
-}
-.cn-day-past { color: #b0a898; }
-.cn-month-past { color: #bab0a0; }
-.cn-year {
-font-family: ‘Montserrat’, sans-serif;
-font-size: 10px;
-font-weight: 300;
-letter-spacing: 0.15em;
-color: #aaa090;
-margin-top: 10px;
-display: block;
-}
-
-.cn-info {
-padding: 36px 0 36px 48px;
-}
-.cn-title {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 26px;
-font-weight: 400;
-color: #1a1510;
-line-height: 1.2;
-margin-bottom: 7px;
-}
-.cn-title-past { color: #8a8070; }
-.cn-venue {
-font-family: ‘Montserrat’, sans-serif;
-font-size: 10px;
-font-weight: 400;
-letter-spacing: 0.14em;
-text-transform: uppercase;
-color: #8a7f72;
-margin-bottom: 14px;
-}
-.cn-venue-past { color: #b0a898; }
-.cn-program {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 17px;
-font-weight: 300;
-font-style: italic;
-color: #6a6050;
-line-height: 1.7;
-margin-bottom: 14px;
-}
-.cn-program-past { color: #a09888; }
-.cn-link {
-display: inline-block;
-font-family: ‘Montserrat’, sans-serif;
-font-size: 9px;
-font-weight: 400;
-letter-spacing: 0.22em;
-text-transform: uppercase;
-color: #6a5f50;
-text-decoration: none;
-border-bottom: 1px solid #c0b8a8;
-padding-bottom: 2px;
-}
-.cn-msg {
-padding: 36px 0;
-font-size: 11px;
-letter-spacing: 0.1em;
-color: #aaa090;
-}
-
-@media (max-width: 600px) {
-.cn-item { grid-template-columns: 100px 1fr; }
-.cn-date { padding: 24px 18px 24px 0; }
-.cn-day  { font-size: 52px; }
-.cn-info { padding: 24px 0 24px 20px; }
-.cn-title { font-size: 20px; }
-.cn-program { font-size: 15px; }
-}
+  html, body { width: 100%; background: transparent; color: #2a2218; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 14px; letter-spacing: 0.03em; }
+  .cn-section { width: 100%; margin-bottom: 64px; }
+  .cn-section-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: #8a7f72; padding-bottom: 18px; border-bottom: 1px solid #c8bfb0; text-align: center; margin-bottom: 0; }
+  .cn-item { display: grid; grid-template-columns: 200px 1fr; border-bottom: 1px solid #ddd8ce; }
+  .cn-date { padding: 36px 32px 36px 0; border-right: 1px solid #ddd8ce; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .cn-month { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: #8a7f72; margin-bottom: 6px; display: block; }
+  .cn-month-past { color: #bab0a0; }
+  .cn-day { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; line-height: 0.85; color: #2a2218; display: block; }
+  .cn-day-past { color: #b0a898; }
+  .cn-year { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300; letter-spacing: 0.15em; color: #aaa090; margin-top: 10px; display: block; }
+  .cn-info { padding: 36px 0 36px 48px; }
+  .cn-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: #1a1510; line-height: 1.2; margin-bottom: 7px; }
+  .cn-title-past { color: #8a8070; }
+  .cn-venue { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: #8a7f72; margin-bottom: 14px; }
+  .cn-venue-past { color: #b0a898; }
+  .cn-program { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; font-style: italic; color: #6a6050; line-height: 1.7; margin-bottom: 14px; }
+  .cn-program-past { color: #a09888; }
+  .cn-link { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: #6a5f50; text-decoration: none; border-bottom: 1px solid #c0b8a8; padding-bottom: 2px; }
+  .cn-msg { padding: 36px 0; font-size: 11px; letter-spacing: 0.1em; color: #aaa090; text-align: center; }
+  @media (max-width: 600px) {
+    .cn-item { grid-template-columns: 100px 1fr; }
+    .cn-date { padding: 24px 18px 24px 0; }
+    .cn-day { font-size: 52px; }
+    .cn-info { padding: 24px 0 24px 20px; }
+    .cn-title { font-size: 20px; }
+    .cn-program { font-size: 15px; }
+  }
 </style>
-
 </head>
 <body>
-
 <div class="cn-section">
   <div class="cn-section-title">Upcoming Concerts</div>
   <div id="cn-upcoming"><div class="cn-msg">Loading…</div></div>
 </div>
-
 <div class="cn-section">
   <div class="cn-section-title">Past Concerts</div>
   <div id="cn-past"><div class="cn-msg">Loading…</div></div>
 </div>
-
 <script>
-(function() {
-  var SHEET_ID = '1rR5oKqf0ujCSWfPeeMuCYldgNbmu0h_7Ay1gPVuHxe4';
-  var MONTHS   = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var BIN_ID  = '69c07b49c3097a1dd54d1bd4';
+var API_KEY = '$2a$10$fAYBnW03jGvqzUFSqUy2i.KgOzZffYGqxZbC5ktphCdlqWuQdW0MO';
+var MONTHS  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-  function parseDate(str) {
-    var p = String(str).split('-').map(Number);
-    return new Date(p[0], p[1]-1, p[2]);
-  }
+function parseDate(str) {
+  var p = str.split('-').map(Number);
+  return new Date(p[0], p[1]-1, p[2]);
+}
 
-  function renderConcert(row, isPast) {
-    var dateStr   = String(row[0]||'').trim();
-    var title     = String(row[1]||'').trim();
-    var venue     = String(row[2]||'').trim();
-    var city      = String(row[3]||'').trim();
-    var program   = String(row[4]||'').trim();
-    var ticketUrl = String(row[5]||'').trim();
+function renderConcert(c, isPast) {
+  var d        = parseDate(c.date);
+  var day      = d.getDate();
+  var month    = MONTHS[d.getMonth()];
+  var year     = d.getFullYear();
+  var thisYear = new Date().getFullYear();
+  var venueCity   = [c.venue, c.city].filter(Boolean).join(' · ');
+  var programHtml = c.program ? '<div class="cn-program'+(isPast?' cn-program-past':'')+'">'+c.program.replace(/\n/g,'<br>')+'</div>' : '';
+  var linkHtml    = c.ticketUrl ? '<a class="cn-link" href="'+c.ticketUrl+'" target="_blank">Tickets →</a>' : '';
+  var yearHtml    = year !== thisYear ? '<span class="cn-year">'+year+'</span>' : '';
+  return '<div class="cn-item">'
+    +'<div class="cn-date">'
+    +'<span class="cn-month'+(isPast?' cn-month-past':'')+'">'+month+'</span>'
+    +'<span class="cn-day'+(isPast?' cn-day-past':'')+'">'+day+'</span>'
+    +yearHtml
+    +'</div>'
+    +'<div class="cn-info">'
+    +'<div class="cn-title'+(isPast?' cn-title-past':'')+'">'+c.title+'</div>'
+    +(venueCity?'<div class="cn-venue'+(isPast?' cn-venue-past':'')+'">'+venueCity+'</div>':'')
+    +programHtml+linkHtml
+    +'</div></div>';
+}
 
-    var d        = parseDate(dateStr);
-    var day      = d.getDate();
-    var month    = MONTHS[d.getMonth()];
-    var year     = d.getFullYear();
-    var thisYear = new Date().getFullYear();
+function renderAll(concerts) {
+  var today    = new Date(); today.setHours(0,0,0,0);
+  var upcoming = concerts.filter(function(c){ return parseDate(c.date) >= today; }).sort(function(a,b){ return parseDate(a.date)-parseDate(b.date); });
+  var past     = concerts.filter(function(c){ return parseDate(c.date) <  today; }).sort(function(a,b){ return parseDate(b.date)-parseDate(a.date); });
+  document.getElementById('cn-upcoming').innerHTML = upcoming.length ? upcoming.map(function(c){ return renderConcert(c,false); }).join('') : '<div class="cn-msg">No upcoming concerts listed.</div>';
+  document.getElementById('cn-past').innerHTML     = past.length     ? past.map(function(c){ return renderConcert(c,true);  }).join('') : '<div class="cn-msg">No past concerts listed.</div>';
+}
 
-    var venueCity   = [venue, city].filter(Boolean).join(' · ');
-    var programHtml = program ? '<div class="cn-program' + (isPast?' cn-program-past':'') + '">' + program.replace(/·/g,'<br>') + '</div>' : '';
-    var linkHtml    = ticketUrl ? '<a class="cn-link" href="' + ticketUrl + '" target="_blank">Tickets →</a>' : '';
-    var yearHtml    = year !== thisYear ? '<span class="cn-year">' + year + '</span>' : '';
-
-    return '<div class="cn-item">'
-      + '<div class="cn-date">'
-        + '<span class="cn-month' + (isPast?' cn-month-past':'') + '">' + month + '</span>'
-        + '<span class="cn-day'  + (isPast?' cn-day-past':'')   + '">' + day   + '</span>'
-        + yearHtml
-      + '</div>'
-      + '<div class="cn-info">'
-        + '<div class="cn-title'  + (isPast?' cn-title-past':'')  + '">' + title + '</div>'
-        + (venueCity ? '<div class="cn-venue' + (isPast?' cn-venue-past':'') + '">' + venueCity + '</div>' : '')
-        + programHtml
-        + linkHtml
-      + '</div>'
-      + '</div>';
-  }
-
-  function renderAll(data) {
-    var today    = new Date(); today.setHours(0,0,0,0);
-    var upcoming = data.filter(function(r){ return parseDate(r[0]) >= today; }).sort(function(a,b){ return parseDate(a[0])-parseDate(b[0]); });
-    var past     = data.filter(function(r){ return parseDate(r[0]) <  today; }).sort(function(a,b){ return parseDate(b[0])-parseDate(a[0]); });
-
-    document.getElementById('cn-upcoming').innerHTML = upcoming.length
-      ? upcoming.map(function(r){ return renderConcert(r,false); }).join('')
-      : '<div class="cn-msg">No upcoming concerts listed.</div>';
-    document.getElementById('cn-past').innerHTML = past.length
-      ? past.map(function(r){ return renderConcert(r,true); }).join('')
-      : '<div class="cn-msg">No past concerts listed.</div>';
-  }
-
-  fetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json')
-    .then(function(res){ return res.text(); })
-    .then(function(text){
-      var json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-      var rows = json.table.rows
-        .map(function(r){ return r.c.map(function(c){ return c ? (c.v!=null ? c.v : (c.f||'')) : ''; }); })
-        .filter(function(r){ return r[0]; });
-      rows.shift();
-      renderAll(rows);
-    })
-    .catch(function(e){
-      console.error(e);
-      document.getElementById('cn-upcoming').innerHTML = '<div class="cn-msg">Could not load concerts.</div>';
-      document.getElementById('cn-past').innerHTML = '';
-    });
-})();
+fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest', { headers: { 'X-Access-Key': API_KEY } })
+  .then(function(r){ return r.json(); })
+  .then(function(data){ renderAll(data.record.concerts || []); })
+  .catch(function(){ document.getElementById('cn-upcoming').innerHTML = '<div class="cn-msg">Could not load concerts.</div>'; });
 </script>
-
 </body>
 </html>
