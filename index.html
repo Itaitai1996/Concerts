@@ -46,7 +46,7 @@
   <div id="cn-past"><div class="cn-msg">Loading…</div></div>
 </div>
 <script>
-var BIN_ID  = '69c07fcec3097a1dd54d2a82';
+var BIN_ID  = '69c0814eb7ec241ddc92667b';
 var API_KEY = '$2a$10$GcFW41dq0sL4Oojo2Mf5Tutqp/jF7uAZ/cK6VLeosSw9IVL4LqDGO';
 var MONTHS  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -86,7 +86,7 @@ function renderAll(concerts) {
   document.getElementById('cn-past').innerHTML     = past.length     ? past.map(function(c){ return renderConcert(c,true);  }).join('') : '<div class="cn-msg">No past concerts listed.</div>';
 }
 
-fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest', { headers: { 'X-Master-Key': API_KEY } })
+fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest')
   .then(function(r){ return r.json(); })
   .then(function(data){ renderAll(data.record.concerts || []); })
   .catch(function(){ document.getElementById('cn-upcoming').innerHTML = '<div class="cn-msg">Could not load concerts.</div>'; });
