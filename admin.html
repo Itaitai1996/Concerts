@@ -3,300 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Concert Manager – Itai Navon</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Concerts – Itai Navon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #f5f2ee; color: #2a2218; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; min-height: 100vh; }
-
-  /* Login */
-  #login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-  .login-box { background: #fff; padding: 48px; width: 360px; box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
-  .login-box h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; margin-bottom: 8px; color: #1a1510; }
-  .login-box p { font-size: 11px; letter-spacing: 0.1em; color: #8a7f72; margin-bottom: 32px; }
-  .login-box input { width: 100%; padding: 12px; border: 1px solid #ddd8ce; font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 16px; outline: none; }
-  .login-box input:focus { border-color: #8a7f72; }
-  .btn { width: 100%; padding: 12px; background: #2a2218; color: #f5f2ee; border: none; font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
-  .btn:hover { background: #1a1510; }
-  .error-msg { color: #c0392b; font-size: 11px; margin-top: 8px; display: none; }
-
-  /* Main app */
-  #app { display: none; max-width: 900px; margin: 0 auto; padding: 40px 24px; }
-  .app-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #c8bfb0; }
-  .app-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: #1a1510; }
-  .app-header button { background: none; border: 1px solid #c8bfb0; padding: 8px 16px; font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #8a7f72; cursor: pointer; }
-
-  /* Form */
-  .form-card { background: #fff; padding: 32px; margin-bottom: 40px; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
-  .form-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #1a1510; margin-bottom: 24px; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-field { display: flex; flex-direction: column; gap: 6px; }
-  .form-field.full { grid-column: 1 / -1; }
-  .form-field label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a7f72; }
-  .form-field input, .form-field textarea { padding: 10px 12px; border: 1px solid #ddd8ce; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 300; outline: none; resize: vertical; }
-  .form-field input:focus, .form-field textarea:focus { border-color: #8a7f72; }
-  .form-field textarea { min-height: 80px; }
-  .form-actions { margin-top: 20px; display: flex; gap: 12px; align-items: center; }
-  .btn-add { padding: 12px 32px; background: #2a2218; color: #f5f2ee; border: none; font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
-  .btn-add:hover { background: #1a1510; }
-  .btn-cancel { padding: 12px 24px; background: none; border: 1px solid #ddd8ce; font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #8a7f72; cursor: pointer; display: none; }
-  .save-status { font-size: 11px; color: #8a7f72; letter-spacing: 0.05em; }
-
-  /* Concert list */
-  .list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-  .list-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #1a1510; }
-  .list-tabs { display: flex; gap: 0; border: 1px solid #ddd8ce; overflow: hidden; }
-  .tab { padding: 8px 20px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; background: #fff; color: #8a7f72; border: none; font-family: 'Montserrat', sans-serif; }
-  .tab.active { background: #2a2218; color: #f5f2ee; }
-
-  .concert-row { background: #fff; margin-bottom: 2px; display: grid; grid-template-columns: 120px 1fr auto; align-items: center; padding: 16px 20px; gap: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-  .concert-row-date { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #2a2218; line-height: 1; }
-  .concert-row-date span { display: block; font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: #8a7f72; margin-bottom: 4px; font-weight: 400; }
-  .concert-row-info { min-width: 0; }
-  .concert-row-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: #1a1510; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .concert-row-venue { font-size: 10px; letter-spacing: 0.1em; color: #8a7f72; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .concert-row-actions { display: flex; gap: 8px; flex-shrink: 0; }
-  .btn-edit { padding: 6px 14px; background: none; border: 1px solid #ddd8ce; font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #6a5f50; cursor: pointer; }
-  .btn-edit:hover { border-color: #8a7f72; }
-  .btn-delete { padding: 6px 14px; background: none; border: 1px solid #ddd8ce; font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #c0392b; cursor: pointer; }
-  .btn-delete:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
-  .empty-msg { padding: 32px; text-align: center; color: #aaa090; font-size: 11px; letter-spacing: 0.1em; background: #fff; }
-
+  html, body { width: 100%; background: transparent; color: #2a2218; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 14px; letter-spacing: 0.03em; }
+  .cn-section { width: 100%; margin-bottom: 64px; }
+  .cn-section-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: #8a7f72; padding-bottom: 18px; border-bottom: 1px solid #c8bfb0; text-align: center; margin-bottom: 0; }
+  .cn-item { display: grid; grid-template-columns: 200px 1fr; border-bottom: 1px solid #ddd8ce; }
+  .cn-date { padding: 36px 32px 36px 0; border-right: 1px solid #ddd8ce; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .cn-month { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: #8a7f72; margin-bottom: 6px; display: block; }
+  .cn-month-past { color: #bab0a0; }
+  .cn-day { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; line-height: 0.85; color: #2a2218; display: block; }
+  .cn-day-past { color: #b0a898; }
+  .cn-year { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300; letter-spacing: 0.15em; color: #aaa090; margin-top: 10px; display: block; }
+  .cn-info { padding: 36px 0 36px 48px; }
+  .cn-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: #1a1510; line-height: 1.2; margin-bottom: 7px; }
+  .cn-title-past { color: #8a8070; }
+  .cn-venue { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: #8a7f72; margin-bottom: 14px; }
+  .cn-venue-past { color: #b0a898; }
+  .cn-program { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; font-style: italic; color: #6a6050; line-height: 1.7; margin-bottom: 14px; }
+  .cn-program-past { color: #a09888; }
+  .cn-link { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: #6a5f50; text-decoration: none; border-bottom: 1px solid #c0b8a8; padding-bottom: 2px; }
+  .cn-msg { padding: 36px 0; font-size: 11px; letter-spacing: 0.1em; color: #aaa090; text-align: center; }
   @media (max-width: 600px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .concert-row { grid-template-columns: 80px 1fr auto; gap: 12px; padding: 12px; }
-    .concert-row-date { font-size: 18px; }
+    .cn-item { grid-template-columns: 100px 1fr; }
+    .cn-date { padding: 24px 18px 24px 0; }
+    .cn-day { font-size: 52px; }
+    .cn-info { padding: 24px 0 24px 20px; }
+    .cn-title { font-size: 20px; }
+    .cn-program { font-size: 15px; }
   }
 </style>
 </head>
 <body>
-
-<!-- Login -->
-<div id="login-screen">
-  <div class="login-box">
-    <h1>Concert Manager</h1>
-    <p>Itai Navon — Admin</p>
-    <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
-    <button class="btn" onclick="login()">Enter</button>
-    <div class="error-msg" id="pw-error">Incorrect password</div>
-  </div>
+<div class="cn-section">
+  <div class="cn-section-title">Upcoming Concerts</div>
+  <div id="cn-upcoming"><div class="cn-msg">Loading…</div></div>
 </div>
-
-<!-- App -->
-<div id="app">
-  <div class="app-header">
-    <h1>Concert Manager</h1>
-    <button onclick="logout()">Log out</button>
-  </div>
-
-  <!-- Add / Edit Form -->
-  <div class="form-card">
-    <h2 id="form-title">Add Concert</h2>
-    <div class="form-grid">
-      <div class="form-field">
-        <label>Date *</label>
-        <input type="date" id="f-date">
-      </div>
-      <div class="form-field">
-        <label>Title *</label>
-        <input type="text" id="f-title" placeholder="e.g. Solo Recital">
-      </div>
-      <div class="form-field">
-        <label>Venue</label>
-        <input type="text" id="f-venue" placeholder="e.g. Wigmore Hall">
-      </div>
-      <div class="form-field">
-        <label>City</label>
-        <input type="text" id="f-city" placeholder="e.g. London">
-      </div>
-      <div class="form-field full">
-        <label>Program (one work per line)</label>
-        <textarea id="f-program" placeholder="e.g. Schubert — Sonata in A minor D 784&#10;Brahms — Variations Op. 24"></textarea>
-      </div>
-      <div class="form-field full">
-        <label>Ticket URL (optional)</label>
-        <input type="url" id="f-ticket" placeholder="https://...">
-      </div>
-    </div>
-    <div class="form-actions">
-      <button class="btn-add" onclick="saveConcert()">Save Concert</button>
-      <button class="btn-cancel" id="btn-cancel" onclick="cancelEdit()">Cancel</button>
-      <span class="save-status" id="save-status"></span>
-    </div>
-  </div>
-
-  <!-- List -->
-  <div class="list-header">
-    <h2>All Concerts</h2>
-    <div class="list-tabs">
-      <button class="tab active" onclick="showTab('upcoming',this)">Upcoming</button>
-      <button class="tab" onclick="showTab('past',this)">Past</button>
-    </div>
-  </div>
-  <div id="concert-list"></div>
+<div class="cn-section">
+  <div class="cn-section-title">Past Concerts</div>
+  <div id="cn-past"><div class="cn-msg">Loading…</div></div>
 </div>
-
 <script>
-// ── CONFIG ──────────────────────────────────────────
-var PASSWORD = 'Itai486245';
-var BIN_ID   = '69c08370aa77b81da90c4b5b';
-var API_KEY  = '$2a$10$GcFW41dq0sL4Oojo2Mf5Tutqp/jF7uAZ/cK6VLeosSw9IVL4LqDGO';
-// ────────────────────────────────────────────────────
-
-var concerts   = [];
-var editingId  = null;
-var activeTab  = 'upcoming';
-var MONTHS     = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var BIN_ID  = '69c08370aa77b81da90c4b5b';
+var API_KEY = '$2a$10$GcFW41dq0sL4Oojo2Mf5Tutqp/jF7uAZ/cK6VLeosSw9IVL4LqDGO';
+var MONTHS  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 function parseDate(str) {
   var p = str.split('-').map(Number);
   return new Date(p[0], p[1]-1, p[2]);
 }
-function formatDateLabel(str) {
-  var d = parseDate(str);
-  return MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-}
 
-// ── Auth ──
-function login() {
-  if (document.getElementById('pw-input').value === PASSWORD) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    loadConcerts();
+function renderConcert(c, isPast) {
+  var d        = parseDate(c.date);
+  var day      = d.getDate();
+  var month    = MONTHS[d.getMonth()];
+  var year     = d.getFullYear();
+  var thisYear = new Date().getFullYear();
+  var venueCity   = [c.venue, c.city].filter(Boolean).join(' · ');
+  var programHtml = c.program ? '<div class="cn-program'+(isPast?' cn-program-past':'')+'">'+c.program.replace(/\n/g,'<br>')+'</div>' : '';
+  var linkHtml    = c.ticketUrl ? '<a class="cn-link" href="'+c.ticketUrl+'" target="_blank">Tickets →</a>' : '';
+  var yearHtml    = year !== thisYear ? '<span class="cn-year">'+year+'</span>' : '';
+
+  var dayHtml, monthHtml;
+  if (c.dateEnd && c.dateEnd !== c.date) {
+    var d2 = parseDate(c.dateEnd);
+    if (d.getMonth() === d2.getMonth()) {
+      monthHtml = month;
+      dayHtml   = day + '–' + d2.getDate();
+    } else {
+      monthHtml = MONTHS[d.getMonth()].substr(0,3) + '–' + MONTHS[d2.getMonth()].substr(0,3);
+      dayHtml   = day + '–' + d2.getDate();
+    }
   } else {
-    document.getElementById('pw-error').style.display = 'block';
-  }
-}
-function logout() {
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('pw-input').value = '';
-}
-
-// ── JSONbin ──
-function loadConcerts() {
-  setStatus('Loading…');
-  fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest')
-  .then(function(r){ return r.json(); })
-  .then(function(data){
-    concerts = data.record.concerts || [];
-    setStatus('');
-    renderList();
-  })
-  .catch(function(){ setStatus('Could not load data.'); });
-}
-
-function saveToBin() {
-  return fetch('https://api.jsonbin.io/v3/b/'+BIN_ID, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-    body: JSON.stringify({ concerts: concerts })
-  });
-}
-
-// ── Form ──
-function saveConcert() {
-  var date  = document.getElementById('f-date').value;
-  var title = document.getElementById('f-title').value.trim();
-  if (!date || !title) { setStatus('Date and title are required.'); return; }
-
-  var concert = {
-    id:        editingId || Date.now().toString(),
-    date:      date,
-    title:     title,
-    venue:     document.getElementById('f-venue').value.trim(),
-    city:      document.getElementById('f-city').value.trim(),
-    program:   document.getElementById('f-program').value.trim(),
-    ticketUrl: document.getElementById('f-ticket').value.trim()
-  };
-
-  if (editingId) {
-    concerts = concerts.map(function(c){ return c.id === editingId ? concert : c; });
-  } else {
-    concerts.push(concert);
+    monthHtml = month;
+    dayHtml   = day;
   }
 
-  setStatus('Saving…');
-  saveToBin().then(function(){
-    setStatus('Saved ✓');
-    resetForm();
-    renderList();
-    setTimeout(function(){ setStatus(''); }, 2000);
-  }).catch(function(){ setStatus('Save failed.'); });
+  return '<div class="cn-item">'
+    +'<div class="cn-date">'
+    +'<span class="cn-month'+(isPast?' cn-month-past':'')+'">'+monthHtml+'</span>'
+    +'<span class="cn-day'+(isPast?' cn-day-past':'')+'">'+dayHtml+'</span>'
+    +yearHtml
+    +'</div>'
+    +'<div class="cn-info">'
+    +'<div class="cn-title'+(isPast?' cn-title-past':'')+'">'+c.title+'</div>'
+    +(venueCity?'<div class="cn-venue'+(isPast?' cn-venue-past':'')+'">'+venueCity+'</div>':'')
+    +programHtml+linkHtml
+    +'</div></div>';
 }
 
-function editConcert(id) {
-  var c = concerts.find(function(x){ return x.id === id; });
-  if (!c) return;
-  editingId = id;
-  document.getElementById('f-date').value    = c.date;
-  document.getElementById('f-title').value   = c.title;
-  document.getElementById('f-venue').value   = c.venue || '';
-  document.getElementById('f-city').value    = c.city  || '';
-  document.getElementById('f-program').value = c.program || '';
-  document.getElementById('f-ticket').value  = c.ticketUrl || '';
-  document.getElementById('form-title').textContent = 'Edit Concert';
-  document.getElementById('btn-cancel').style.display = 'inline-block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function deleteConcert(id) {
-  if (!confirm('Delete this concert?')) return;
-  concerts = concerts.filter(function(c){ return c.id !== id; });
-  setStatus('Saving…');
-  saveToBin().then(function(){
-    setStatus('Deleted ✓');
-    renderList();
-    setTimeout(function(){ setStatus(''); }, 2000);
-  }).catch(function(){ setStatus('Save failed.'); });
-}
-
-function cancelEdit() { resetForm(); }
-function resetForm() {
-  editingId = null;
-  ['f-date','f-title','f-venue','f-city','f-program','f-ticket'].forEach(function(id){ document.getElementById(id).value = ''; });
-  document.getElementById('form-title').textContent = 'Add Concert';
-  document.getElementById('btn-cancel').style.display = 'none';
-}
-
-// ── List ──
-function showTab(tab, el) {
-  activeTab = tab;
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-  el.classList.add('active');
-  renderList();
-}
-
-function renderList() {
+function renderAll(concerts) {
   var today    = new Date(); today.setHours(0,0,0,0);
-  var filtered = concerts.filter(function(c){
-    return activeTab === 'upcoming' ? parseDate(c.date) >= today : parseDate(c.date) < today;
-  }).sort(function(a,b){
-    return activeTab === 'upcoming' ? parseDate(a.date)-parseDate(b.date) : parseDate(b.date)-parseDate(a.date);
-  });
-
-  if (!filtered.length) {
-    document.getElementById('concert-list').innerHTML = '<div class="empty-msg">No '+activeTab+' concerts.</div>';
-    return;
-  }
-
-  document.getElementById('concert-list').innerHTML = filtered.map(function(c) {
-    var d = parseDate(c.date);
-    return '<div class="concert-row">'
-      +'<div class="concert-row-date"><span>'+MONTHS[d.getMonth()]+'</span>'+d.getDate()+'<br><small style="font-family:Montserrat;font-size:9px;color:#aaa090;">'+d.getFullYear()+'</small></div>'
-      +'<div class="concert-row-info">'
-        +'<div class="concert-row-title">'+c.title+'</div>'
-        +'<div class="concert-row-venue">'+[c.venue,c.city].filter(Boolean).join(' · ')+'</div>'
-      +'</div>'
-      +'<div class="concert-row-actions">'
-        +'<button class="btn-edit" onclick="editConcert(\''+c.id+'\')">Edit</button>'
-        +'<button class="btn-delete" onclick="deleteConcert(\''+c.id+'\')">Delete</button>'
-      +'</div>'
-      +'</div>';
-  }).join('');
+  var upcoming = concerts.filter(function(c){ 
+    var endDate = c.dateEnd ? parseDate(c.dateEnd) : parseDate(c.date);
+    return endDate >= today; 
+  }).sort(function(a,b){ return parseDate(a.date)-parseDate(b.date); });
+  var past = concerts.filter(function(c){ 
+    var endDate = c.dateEnd ? parseDate(c.dateEnd) : parseDate(c.date);
+    return endDate < today; 
+  }).sort(function(a,b){ return parseDate(b.date)-parseDate(a.date); });
+  document.getElementById('cn-upcoming').innerHTML = upcoming.length ? upcoming.map(function(c){ return renderConcert(c,false); }).join('') : '<div class="cn-msg">No upcoming concerts listed.</div>';
+  document.getElementById('cn-past').innerHTML     = past.length     ? past.map(function(c){ return renderConcert(c,true);  }).join('') : '<div class="cn-msg">No past concerts listed.</div>';
 }
 
-function setStatus(msg) { document.getElementById('save-status').textContent = msg; }
+fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest')
+  .then(function(r){ return r.json(); })
+  .then(function(data){ renderAll(data.record.concerts || []); })
+  .catch(function(){ document.getElementById('cn-upcoming').innerHTML = '<div class="cn-msg">Could not load concerts.</div>'; });
 </script>
 </body>
 </html>
