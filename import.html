@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Import Concerts</title>
+<style>
+  body { font-family: monospace; padding: 40px; background: #f5f5f5; }
+  #status { font-size: 16px; margin-bottom: 20px; }
+  #result { background: #fff; padding: 20px; border: 1px solid #ddd; white-space: pre-wrap; font-size: 12px; }
+  .ok { color: green; }
+  .err { color: red; }
+</style>
+</head>
+<body>
+<div id="status">Importing concerts to JSONbin…</div>
+<div id="result"></div>
+<script>
+var BIN_ID  = '69c08370aa77b81da90c4b5b';
+var API_KEY = '$2a$10$GcFW41dq0sL4Oojo2Mf5Tutqp/jF7uAZ/cK6VLeosSw9IVL4LqDGO';
+
+var data = {
+  concerts: [
+    {id:"1",date:"2026-04-19",title:"Recital with Elad Navon",venue:"Teatro Fraschini",city:"Pavia",program:"Debussy\nPenderecki\nBrahms\nHindemith\nBassi",ticketUrl:""},
+    {id:"2",date:"2026-04-21",title:"Recital with Elad Navon",venue:"Piano Salon Christophori",city:"Berlin",program:"Debussy\nPenderecki\nBrahms\nHindemith\nBassi",ticketUrl:"https://www.konzertfluegel.com/N_konzerte.html"},
+    {id:"3",date:"2026-06-27",title:"Württembergisches Kammerorchester Heilbronn",venue:"Casals Forum",city:"Kronberg",program:"Bach — Concerto in A major BWV 1055",ticketUrl:""},
+    {id:"4",date:"2026-07-03",title:"Solo Recital",venue:"Israel Conservatory of Music",city:"Tel Aviv",program:"Haydn\nChopin\nBeethoven Op. 109\nSeter\nBrahms Op. 24",ticketUrl:"https://www.icm.org.il/event/navon/"},
+    {id:"5",date:"2026-07-16",title:"Festival de Vauvenargues",venue:"Château de Vauvenargues",city:"Vauvenargues",program:"Program TBA",ticketUrl:""},
+    {id:"6",date:"2026-07-17",title:"Festival de Vauvenargues",venue:"Château de Vauvenargues",city:"Vauvenargues",program:"Program TBA",ticketUrl:""},
+    {id:"7",date:"2026-07-19",title:"Copenhagen Summer Festival",venue:"Copenhagen",city:"Copenhagen",program:"Brahms — Piano Trio no. 2 in C major Op. 87\nBeethoven — Allegretto WoO 39\nArensky — Piano Trio no. 1 in D minor Op. 32",ticketUrl:""},
+    {id:"8",date:"2026-07-28",title:"Recital with Elad Navon",venue:"Ludwigsburger Schlossfestspiele",city:"Ludwigsburg",program:"Weber — Grand Duo Concertant Op. 48\nHindemith — Sonata in B\nPoulenc — Sonata for Clarinet and Piano\nBrahms — Clarinet Sonata Op. 120/2",ticketUrl:""},
+    {id:"9",date:"2026-07-29",title:"Recital with Elad Navon",venue:"Ludwigsburger Schlossfestspiele",city:"Ludwigsburg",program:"Weber — Grand Duo Concertant Op. 48\nHindemith — Sonata in B\nPoulenc — Sonata for Clarinet and Piano\nBrahms — Clarinet Sonata Op. 120/2",ticketUrl:""},
+    {id:"10",date:"2026-08-28",title:"Recital with Elad Navon",venue:"Via Nova Kunstfest Corvey",city:"Corvey",program:"Program TBA",ticketUrl:""},
+    {id:"11",date:"2026-09-03",title:"Chamber Music Festival",venue:"Stockholm",city:"Stockholm",program:"Program TBA",ticketUrl:""},
+    {id:"12",date:"2027-02-17",title:"Recital with Elad Navon",venue:"Münchner Künstlerhaus Festsaal",city:"Munich",program:"Program TBA",ticketUrl:""},
+    {id:"13",date:"2027-04-09",title:"Israel Philharmonic Orchestra",venue:"Tel Aviv",city:"Tel Aviv",program:"Brahms — Piano Concerto no. 1 in D minor Op. 15\ncond. András Schiff",ticketUrl:""},
+    {id:"14",date:"2027-05-13",title:"Solo Recital",venue:"Neumarkter Konzertfreunde",city:"Neumarkt",program:"Schubert — Sonata in A minor D 784\nJanáček — Piano Sonata 1.X.1905\nFauré — Barcarolles 7 & 8 / Nocturne 13\nDebussy — Images Book II\nBartók — Out of Doors",ticketUrl:""},
+    {id:"15",date:"2026-03-20",title:"Solo Recital",venue:"Israel Conservatory of Music",city:"Tel Aviv",program:"Haydn · Chopin · Beethoven Op. 109 · Seter · Brahms Op. 24",ticketUrl:"https://www.icm.org.il/event/navon/"},
+    {id:"16",date:"2026-03-16",title:"Solo Recital",venue:"Piano Salon Christophori",city:"Berlin",program:"Haydn — Variations in F minor Hob. XVII:6",ticketUrl:"https://www.konzertfluegel.com/N_konzerte.html"},
+    {id:"17",date:"2025-11-01",title:"Recital with Claire Wells",venue:"La Coruña",city:"La Coruña",program:"Program TBA",ticketUrl:""},
+    {id:"18",date:"2025-08-01",title:"Solo Recital",venue:"Copenhagen Summer Festival",city:"Copenhagen",program:"Program TBA",ticketUrl:""},
+    {id:"19",date:"2025-05-01",title:"Chamber concert with Chianti Ensemble",venue:"Mahler Festival / Concertgebouw",city:"Amsterdam",program:"Program TBA",ticketUrl:""},
+    {id:"20",date:"2024-11-12",title:"Solo Recital",venue:"Christians Kirke",city:"Copenhagen",program:"Program TBA",ticketUrl:""},
+    {id:"21",date:"2024-10-01",title:"Recital with H.C. Aavik & P. Schupelius",venue:"Bad Cannstatt",city:"Bad Cannstatt",program:"Program TBA",ticketUrl:""},
+    {id:"22",date:"2024-09-01",title:"Mozart Concerto K.315f",venue:"Liszt Academy Hall",city:"Budapest",program:"with Anima Musicae Chamber Orchestra",ticketUrl:""},
+    {id:"23",date:"2024-08-01",title:"Recital with Sara Ferrández",venue:"Bothmer Musik Festival",city:"Germany",program:"Program TBA",ticketUrl:""},
+    {id:"24",date:"2024-05-01",title:"Chamber music with COE members",venue:"Schloss Esterházy",city:"Eisenstadt",program:"Program TBA",ticketUrl:""},
+    {id:"25",date:"2024-05-01",title:"Chamber Music Connects the World",venue:"Kronberg Academy",city:"Kronberg",program:"with Miklós Perényi and participants",ticketUrl:""},
+    {id:"26",date:"2024-02-01",title:"Solo Recital",venue:"Pierre Boulez Saal",city:"Berlin",program:"Program TBA",ticketUrl:""},
+    {id:"27",date:"2024-01-01",title:"Solo Recital",venue:"Jerusalem Music Centre",city:"Jerusalem",program:"Program TBA",ticketUrl:""},
+    {id:"28",date:"2023-11-01",title:"Gala concert / Klavierfestival Ruhr",venue:"Essen Philharmonie",city:"Essen",program:"with Divan Ensemble",ticketUrl:""},
+    {id:"29",date:"2023-10-01",title:"Chamber concert with Gary Hoffman",venue:"Wigmore Hall",city:"London",program:"with young soloists of Kronberg Academy",ticketUrl:""},
+    {id:"30",date:"2023-10-01",title:"Chamber concert with Gary Hoffman",venue:"Deutschlandfunk (Raderberg)",city:"Cologne",program:"with young soloists of Kronberg Academy",ticketUrl:""},
+    {id:"31",date:"2023-08-01",title:"Solo Recital",venue:"Klassz a pARTon Festival",city:"Hungary",program:"Program TBA",ticketUrl:""},
+    {id:"32",date:"2023-04-01",title:"Espresso Konzert with Sara Ferrández",venue:"Konzerthaus Berlin",city:"Berlin",program:"Program TBA",ticketUrl:""},
+    {id:"33",date:"2023-03-01",title:"Solo Recital",venue:"Ehrbar Saal",city:"Vienna",program:"Program TBA",ticketUrl:""},
+    {id:"34",date:"2023-03-01",title:"Espresso Konzert with P. Schupelius",venue:"Konzerthaus Berlin",city:"Berlin",program:"Program TBA",ticketUrl:""}
+  ]
+};
+
+fetch('https://api.jsonbin.io/v3/b/' + BIN_ID, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Master-Key': API_KEY
+  },
+  body: JSON.stringify(data)
+})
+.then(function(r){ return r.json(); })
+.then(function(res){
+  document.getElementById('status').innerHTML = '<span class="ok">✓ Done! All 34 concerts imported successfully.</span>';
+  document.getElementById('result').textContent = JSON.stringify(res, null, 2);
+})
+.catch(function(e){
+  document.getElementById('status').innerHTML = '<span class="err">✗ Error: ' + e.message + '</span>';
+  document.getElementById('result').textContent = e.toString();
+});
+</script>
+</body>
+</html>
